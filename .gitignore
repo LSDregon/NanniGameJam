@@ -72,3 +72,9 @@ Plugins/*/Intermediate/*
 
 # Cache files for the editor to use
 DerivedDataCache/*
+.idea/.idea.OakIsland/.idea/misc.xml
+Plugins/Developer/RiderLink/*
+*.fbx
+*.fbx
+*.fbx
+*.fbx
