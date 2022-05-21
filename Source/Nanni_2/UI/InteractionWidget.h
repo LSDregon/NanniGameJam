@@ -4,8 +4,10 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
+#include "Slate/SlateBrushAsset.h"
 #include "InteractionWidget.generated.h"
 
+class UInteractionComponent;
 /**
  * 
  */
@@ -16,13 +18,31 @@ class NANNI_2_API UInteractionWidget : public UUserWidget
 	
 public:
 
-	//UFUNCTION(BlueprintCallable, Category = "Interaction")
-	//	void UpdateInteractionWidget(class UInteractionComponent* InteractionComponent);
-
-	//UFUNCTION(BlueprintImplementableEvent)
-	//	void OnUpdateInteractionWidget();
-
-	//UPROPERTY(BlueprintReadOnly, Category = "Interaction", meta = (ExposeOnSpawn))
-	//	UInteractionComponent* OwningInteractionComponent;
 	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	TObjectPtr<UMaterialInstance> CircularMaterialInstance;
+	
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	TObjectPtr<UMaterialInstanceDynamic> CircularMaterialInstanceDynamicInstance;
+	
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	FSlateBrush CircularBrash;
+	
+	UPROPERTY(BlueprintReadOnly, Category = "Interaction", meta = (ExposeOnSpawn))
+	TObjectPtr<UInteractionComponent> OwningInteractionComponent;
+	
+	virtual bool Initialize() override;
+	
+	UFUNCTION(BlueprintCallable, Category = "Interaction")
+	void UpdateInteractionWidget(UInteractionComponent* InteractionComponent);
+
+	
+	UFUNCTION(BlueprintImplementableEvent)
+	void OnUpdateInteractionWidget();
+
+	UFUNCTION(BlueprintCallable)
+	float GetInteractPercent();
+
+	UFUNCTION(BlueprintCallable, BlueprintPure)
+	FSlateBrush GetDynamicBrush();
 };
