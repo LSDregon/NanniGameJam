@@ -21,7 +21,7 @@ AOpeningActor::AOpeningActor()
 	
 	InteractionComponent = CreateDefaultSubobject<UInteractionComponent>("InteractionComponent");
 	InteractionComponent->SetupAttachment(OpeningMesh);
-
+	
 	OpenFront = true;
 	IsClosed = true;
 	ReadyState = true;
@@ -33,6 +33,7 @@ void AOpeningActor::BeginPlay()
 	Super::BeginPlay();
 
 	OnActorHit.AddDynamic(this, &AOpeningActor::StopOpening);
+	InteractionComponent->OnInteract.AddDynamic(this, &AOpeningActor::OpeningOperation);
 
 	if (const UWorld* World = GetWorld())
 	{

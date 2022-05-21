@@ -28,13 +28,13 @@ public:
 	virtual void Tick(float DeltaTime) override;
 	
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Components")
-	USceneComponent* Scene;
+	TObjectPtr<USceneComponent> Scene;
 	
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Components")
-	UStaticMeshComponent* OpeningMesh;
+	TObjectPtr<UStaticMeshComponent> OpeningMesh;
 	
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Components")
-	UInteractionComponent* InteractionComponent;
+	TObjectPtr<UInteractionComponent> InteractionComponent;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	bool OpenFront;
@@ -43,7 +43,7 @@ public:
 	bool IsClosed;
 	
 	UPROPERTY(EditAnywhere)
-	UCurveFloat *DoorCurve;
+	TObjectPtr<UCurveFloat> DoorCurve;
 	
 	UPROPERTY()
 	float DotProductOnInteraction;
@@ -76,7 +76,7 @@ public:
 protected:
 
 	UPROPERTY()
-	AMainCharacter* MainCharacter;
+	TObjectPtr<AMainCharacter> MainCharacter;
 
 private:
 	
