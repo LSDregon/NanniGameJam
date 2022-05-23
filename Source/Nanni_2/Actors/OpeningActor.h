@@ -8,6 +8,7 @@
 #include "Nanni_2/GeneralComponents/InteractionComponent.h"
 #include "OpeningActor.generated.h"
 
+class UEventListenerComponent;
 class AMainCharacter;
 class UInteractionComponent;
 UCLASS()
@@ -35,6 +36,12 @@ public:
 	
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Components")
 	TObjectPtr<UInteractionComponent> InteractionComponent;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Components", Instanced)
+	TObjectPtr<UEventListenerComponent> EventListener; 
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Components")
+	bool bIsAlwaysInteractable;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	bool OpenFront;
@@ -64,6 +71,9 @@ public:
 	UFUNCTION()
 	float GetDotProduct() const;
 	
+	UFUNCTION()
+	void TriggerTaskCompleted(AMainCharacter* Character);
+
 	UFUNCTION()
 	void SetState();
 	

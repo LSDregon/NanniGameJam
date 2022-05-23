@@ -5,6 +5,7 @@
 
 #include "Kismet/GameplayStatics.h"
 #include "Nanni_2/Characters/MainCharacter/MainCharacter.h"
+#include "Nanni_2/GeneralComponents/EventListenerComponent.h"
 #include "Nanni_2/GeneralComponents/InteractionComponent.h"
 
 // Sets default values
@@ -21,7 +22,11 @@ AOpeningActor::AOpeningActor()
 	
 	InteractionComponent = CreateDefaultSubobject<UInteractionComponent>("InteractionComponent");
 	InteractionComponent->SetupAttachment(OpeningMesh);
-	
+
+	EventListener = CreateDefaultSubobject<UEventListenerComponent>(TEXT("Event Listener"));
+	if (EventListener) this->AddOwnedComponent(EventListener);
+
+	bIsAlwaysInteractable = true;
 	OpenFront = true;
 	IsClosed = true;
 	ReadyState = true;
@@ -34,6 +39,7 @@ void AOpeningActor::BeginPlay()
 
 	OnActorHit.AddDynamic(this, &AOpeningActor::StopOpening);
 	InteractionComponent->OnInteract.AddDynamic(this, &AOpeningActor::OpeningOperation);
+	InteractionComponent->OnInteract.AddDynamic(this, &AOpeningActor::TriggerTaskCompleted);
 
 	if (const UWorld* World = GetWorld())
 	{
@@ -67,6 +73,14 @@ void AOpeningActor::StopOpening(AActor* SelfActor, AActor* OtherActor, FVector N
 void AOpeningActor::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	if (EventListener->bIsInAEventTask && !EventListener->bIsActorEnable && !(EventListener->bIsTaskDone && bIsAlwaysInteractable))
+	{
+		OpeningMesh->SetCollisionResponseToChannel(ECollisionChannel::ECC_Visibility, ECollisionResponse::ECR_Ignore);
+	}
+	else
+	{
+		OpeningMesh->SetCollisionResponseToChannel(ECollisionChannel::ECC_Visibility, ECollisionResponse::ECR_Block);
+	}
 	MyTimeline.TickTimeline(DeltaTime);
 }
 
@@ -136,6 +150,11 @@ float AOpeningActor::GetDotProduct() const
 	const FVector OpeningActorForward = GetRootComponent()->GetForwardVector();
 	
 	return FVector::DotProduct(NormalizedVector, OpeningActorForward);
+}
+
+void AOpeningActor::TriggerTaskCompleted(AMainCharacter* Character)
+{
+	EventListener->TaskCompleted(this);
 }
 
 
