@@ -1,2 +1,11 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+Content/Sounds/SoundsWaves/Ambience_Music/AmbienceAmbience_Cementery.uasset filter=lfs diff=lfs merge=lfs -text
+Content/Sounds/SoundsWaves/Ambience_Music/Ambience/Ambience_Cementery.uasset filter=lfs diff=lfs merge=lfs -text
+Content/Sounds/SoundsWaves/Ambience_Music/Ambience/Ambience_Desert.uasset filter=lfs diff=lfs merge=lfs -text
+Content/Sounds/SoundsWaves/Ambience_Music/Ambience/Ambience_Primavera.uasset filter=lfs diff=lfs merge=lfs -text
+Content/Sounds/SoundsWaves/Ambience_Music/Ambience/Ambience_Winter.uasset filter=lfs diff=lfs merge=lfs -text
+Content/Sounds/SoundsWaves/Ambience_Music/Music/Music_Cementery.uasset filter=lfs diff=lfs merge=lfs -text
+Content/Sounds/SoundsWaves/Ambience_Music/Music/Music_Desert.uasset filter=lfs diff=lfs merge=lfs -text
+Content/Sounds/SoundsWaves/Ambience_Music/Music/Music_Inverno.uasset filter=lfs diff=lfs merge=lfs -text
+Content/Sounds/SoundsWaves/Ambience_Music/Music/Music_Primavera.uasset filter=lfs diff=lfs merge=lfs -text
