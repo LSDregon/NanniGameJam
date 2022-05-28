@@ -37,7 +37,7 @@ void AOpeningActor::BeginPlay()
 {
 	Super::BeginPlay();
 
-	OnActorHit.AddDynamic(this, &AOpeningActor::StopOpening);
+	//OnActorHit.AddDynamic(this, &AOpeningActor::StopOpening);
 	InteractionComponent->OnInteract.AddDynamic(this, &AOpeningActor::OpeningOperation);
 	InteractionComponent->OnInteract.AddDynamic(this, &AOpeningActor::TriggerTaskCompleted);
 
