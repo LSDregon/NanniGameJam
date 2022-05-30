@@ -46,5 +46,12 @@
 			"Name": "Soundscape",
 			"Enabled": true
 		}
+	],
+	"TargetPlatforms": [
+		"Linux",
+		"LinuxArm64",
+		"TVOS",
+		"Windows",
+		"IOS"
 	]
 }
